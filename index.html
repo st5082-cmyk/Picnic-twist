@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instructions | Picnic–Twist</title>
+  <style>
+    /* ——— Picnic blanket (gingham) background ——— */
+    :root {
+      --red: #d83a3a;
+      --red-dark: #b02a2a;
+      --ink: #2a2a2a;
+      --green: #1a9f6b;
+    }
+
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
+                   Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--ink);
+      background-color: #ffffff;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(216,58,58,0.12) 0 16px,
+                                       rgba(216,58,58,0.12) 16px 32px,
+                                       rgba(255,255,255,0.12) 32px 48px),
+        repeating-linear-gradient(90deg, rgba(216,58,58,0.12) 0 16px,
+                                        rgba(216,58,58,0.12) 16px 32px,
+                                        rgba(255,255,255,0.12) 32px 48px);
+      background-size: 64px 64px;
+    }
+
+    /* ——— Main container ——— */
+    .wrap {
+      max-width: 920px;
+      margin: clamp(16px, 4vw, 40px) auto;
+      padding: clamp(16px, 3vw, 28px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.92));
+      backdrop-filter: blur(3px);
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(176, 42, 42, 0.18);
+      border: 1px solid rgba(176,42,42,0.18);
+    }
+
+    header {
+      display: grid;
+      gap: 6px;
+      justify-items: center;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px dashed var(--red-dark);
+      font-weight: 600;
+      color: var(--red-dark);
+      letter-spacing: .3px;
+    }
+    h1 {
+      margin: 4px 0 0 0;
+      font-size: clamp(26px, 4.8vw, 40px);
+      line-height: 1.1;
+    }
+    .subtitle {
+      font-size: clamp(14px, 2.4vw, 18px);
+      color: #444;
+    }
+
+    /* ——— Sections ——— */
+    section {
+      margin: 18px 0 8px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-left: 6px solid var(--red);
+      border-radius: 14px;
+      padding: 16px 16px 14px 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    }
+    section h2 {
+      margin: 0 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: clamp(18px, 3vw, 22px);
+    }
+    section h2 .icon { font-size: 1.15em; }
+
+    ul, ol { margin: 0 0 0 20px; }
+    li { margin: 6px 0; }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 8px;
+      background: #fef2f2;
+      color: var(--red-dark);
+      border: 1px solid rgba(176,42,42,0.25);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .note {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      padding: 10px 12px;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .card h3 {
+      margin: 0 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05rem;
+    }
+
+    .winner {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: #f0fff7;
+      border: 1px solid #bbf7d0;
+      border-left: 6px solid var(--green);
+    }
+    .winner h2 { color: #037c4e; }
+
+    /* ——— Action bar ——— */
+    .actions {
+      display: flex;
+      gap: 10px;
+      justify-content: end;
+      margin-bottom: 8px;
+    }
+    .btn {
+      appearance: none;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    /* ——— Print styles ——— */
+    @media print {
+      body { background: #fff; }
+      .wrap { box-shadow: none; border: none; }
+      .actions { display: none; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" role="main">
+    <div class="actions">
+      <button class="btn" onclick="window.print()" aria-label="Print instructions">🖨️ Print</button>
+    </div>
+
+    <header>
+      <span class="badge">Floor Game</span>
+      <h1>Instructions — <em>Picnic–Twist</em> 🧺</h1>
+      <p class="subtitle">Team game on themed mats with a color spinner, 🐝 bees, and 🍪 cookies.</p>
+    </header>
+
+    <!-- Objective -->
+    <section aria-labelledby="objective">
+      <h2 id="objective"><span class="icon">🎯</span> Objective</h2>
+      <p>Two teams compete on separate mats. The goal is to keep balance and follow the instructions correctly. The team that stays complete on the mat for the longest time wins.</p>
+    </section>
+
+    <!-- Materials -->
+    <section aria-labelledby="materials">
+      <h2 id="materials"><span class="icon">🧺</span> Materials</h2>
+      <ul>
+        <li><strong>2 themed mats</strong> — <em>Picnic–Twist</em></li>
+        <li><strong>1 spinner</strong> with the following elements:</li>
+      </ul>
+      <div class="note"><strong>Tip:</strong> Mark <em>colors</em>, <em>bee</em> 🐝, and <em>cookie</em> 🍪 clearly on the spinner.</div>
+    </section>
+
+    <!-- Setup -->
+    <section aria-labelledby="setup">
+      <h2 id="setup"><span class="icon">🧭</span> Setup</h2>
+      <ol>
+        <li>Divide players into two teams, each on its own mat.</li>
+        <li>Choose the <span class="tag">Picnic Guardian</span>, who spins the spinner and gives the instructions aloud.</li>
+        <li>Players stand around their mat, ready to start.</li>
+      </ol>
+    </section>
+
+    <!-- Gameplay -->
+    <section aria-labelledby="gameplay">
+      <h2 id="gameplay"><span class="icon">🎡</span> Gameplay</h2>
+      <ol>
+        <li>The <strong>Picnic Guardian</strong> spins the spinner.</li>
+        <li>Each player places the <strong>indicated body part</strong> on a <strong>fruit or vegetable</strong> that <strong>matches the color</strong> on their own mat.</li>
+      </ol>
+      <div class="cards" role="group" aria-label="Special actions">
+        <article class="card" aria-labelledby="bee">
+          <h3 id="bee">🐝 Bee</h3>
+          <p>The player draws a <strong>Bee card</strong> and completes the short challenge.</p>
+        </article>
+        <article class="card" aria-labelledby="cookie">
+          <h3 id="cookie">🍪 Cookie</h3>
+          <p>The player draws a <strong>Cookie card</strong> and performs the short action.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Rules -->
+    <section aria-labelledby="rules">
+      <h2 id="rules"><span class="icon">📜</span> Rules</h2>
+      <p>A player goes to the waiting area if they:</p>
+      <ul>
+        <li>Fall.</li>
+        <li>Touch the floor with a body part that was not indicated.</li>
+        <li>Move or lift a hand or foot already placed without instruction.</li>
+      </ul>
+      <p>If a team loses too many players to continue, the round ends.</p>
+    </section>
+
+    <!-- Re-entry Rule -->
+    <section aria-labelledby="reentry">
+      <h2 id="reentry"><span class="icon">🔄</span> Re-entry Rule</h2>
+      <p>If a player leaves the mat for a fault, they move to the <strong>Waiting Area</strong>. To return, they complete a short <strong>Re-entry Action</strong>, then rejoin when the Picnic Guardian says it is time.</p>
+      <ul>
+        <li>Say one <strong>color</strong> on the mat.</li>
+        <li>Name one <strong>fruit or vegetable</strong> on the mat.</li>
+        <li>Re-enter with only <strong>one step</strong>.</li>
+        <li>Re-enter by <strong>taking a teammate’s place</strong> (if the teammate agrees).</li>
+      </ul>
+      <p>These actions are quick to keep the game moving.</p>
+    </section>
+
+    <!-- Game Modes -->
+    <section aria-labelledby="modes">
+      <h2 id="modes"><span class="icon">🎲</span> Game Modes</h2>
+
+      <article class="card">
+        <h3>1) Basic Mode</h3>
+        <ul>
+          <li>Two teams on separate mats.</li>
+          <li>Follow the spinner instructions each round.</li>
+          <li>Fault → Waiting Area → Re-entry Action → return.</li>
+          <li>Play 5–10 rounds. The team with more active players at the end wins.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>2) Rotation Mode</h3>
+        <ul>
+          <li>Only some players (e.g., 3) per team are on the mat at once.</li>
+          <li>When a player leaves for a fault, a teammate enters immediately.</li>
+          <li>The player completes a Re-entry Action and returns on the next rotation.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>3) Quick Movement Mode</h3>
+        <ul>
+          <li>Players move on each spin: body part + color.</li>
+          <li>If a player makes a mistake, they go to the Waiting Area → Re-entry.</li>
+          <li>Play by time (e.g., 3–5 minutes per round).</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>4) Shared Mat Mode</h3>
+        <ul>
+          <li>The whole team uses one mat.</li>
+          <li>Players adjust positions to follow the instruction.</li>
+          <li>Only the player who faults goes to the Waiting Area → Re-entry.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>5) Card Mode</h3>
+        <ul>
+          <li>🐝 Bee card: a small controlled challenge (e.g., change places with another player).</li>
+          <li>🍪 Cookie card: a small temporary change (e.g., move one hand once).</li>
+          <li>If the card is not completed, the player goes to the Waiting Area → Re-entry.</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- Winner -->
+    <section class="winner" aria-labelledby="winner">
+      <h2 id="winner"><span class="icon">🏆</span> Winner</h2>
+      <p>The team that keeps active players on the mat and follows the rules is the <strong>Picnic–Twist Champion</strong> 🏆</p>
+    </section>
+
+    <footer style="margin-top:16px; text-align:center; font-size:.9rem; color:#555">
+      © <span id="year"></span> Picnic–Twist · Educational use
+    </footer>
+  </div>
+
+  <script>
+    // dynamic footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
